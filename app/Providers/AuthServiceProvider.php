@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
@@ -26,9 +27,15 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Passport::routes();
-        // return routes related to passport
 
-        //
+        // return routes related to passport
+        Passport::routes(function($router) {
+            $router->forAccessTokens();
+            $router->forPersonalAccessTokens();
+            $router->forTransientTokens();
+        });
+
+        Passport::tokensExpireIn(Carbon::now()->addMinutes(100));
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(100));
     }
 }
