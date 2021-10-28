@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
+class AuthController extends ApiController
 {
     //Register controller
     /**
@@ -23,20 +23,15 @@ class AuthController extends Controller
     public function testOauth(Request $request)
     {
         $user = Auth::user();
-        return response()->json(
-            [
-                'user' => $user
-            ], 200
-        );
+        return $this->sendResponse($user, 'successfully recovered users');
     }
 
     public function test(Request $request)
     {
-        return response()->json(
-            [
-                'status' => 'ok'
-            ], 200
-        );
+        return $this->sendResponse([
+            'status' => 'ok'
+        ], 'successfully recovered users' );
+
     }
     
     /**
@@ -56,9 +51,7 @@ class AuthController extends Controller
         ]);
         // Si falla la validacion devuelve json con status 422
         if($validator->fails()) {
-            return response()->json(
-                ['error' => $validator->errors()], 422
-            );
+            return $this->sendError('Validation error', $validator->errors(), 422 );
         }
         // Si pasa la validacion, guardar datos recibidos
         $input = $request->all();
@@ -68,13 +61,11 @@ class AuthController extends Controller
         $new_user = User::create($input); 
         $token = $new_user->createToken("MyApp")->accessToken;
 
-        return response()->json(
-            [
-                'token' => $token,
-                'user' => $new_user
-            ],
-            200
-        );
+        $data = [
+            'token' => $token,
+            'new_user' => $new_user
+        ];
+        return $this->sendResponse($data, 'Welcome');
     }
 
     /**
