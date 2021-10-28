@@ -29,6 +29,15 @@ class AuthController extends Controller
             ], 200
         );
     }
+
+    public function test(Request $request)
+    {
+        return response()->json(
+            [
+                'status' => 'ok'
+            ], 200
+        );
+    }
     
     /**
      * Store a newly created resource in storage.
