@@ -22,6 +22,7 @@ Route::get('/getUsers', [UserdataController::class,'getUsers']);
 Route::get('/getUsers/{id}', [UserdataController::class,'getUserDetail']);
 Route::post('/getUsers', [UserdataController::class,'addUsers']);
 Route::put('/getUsers', [UserdataController::class,'updateUsers']);
+Route::DELETE('/getUsers', [UserdataController::class,'deleteUsers']);
 
 
 

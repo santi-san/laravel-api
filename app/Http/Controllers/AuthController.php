@@ -20,13 +20,13 @@ class AuthController extends ApiController
         //
     }
 
-    public function testOauth(Request $request)
+    public function testOauth()
     {
         $user = Auth::user();
         return $this->sendResponse($user, 'successfully recovered users');
     }
 
-    public function test(Request $request)
+    public function test()
     {
         return $this->sendResponse([
             'status' => 'ok'
