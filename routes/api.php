@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserdataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,6 @@ Route::get('/test', [AuthController::class,'test']);
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/testOauth', [AuthController::class,'testOauth']);
 });
+
+// Mover a entorno seguro en produccion
+Route::get('/getUsers', [UserdataController::class,'getUsers']);

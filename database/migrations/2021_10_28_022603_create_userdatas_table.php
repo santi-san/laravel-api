@@ -18,7 +18,7 @@ class CreateUserdatasTable extends Migration
             $table->integer('iduser');
             $table->string('name', 128);
             $table->string('photo', 256)->nullable();
-            $table->string('age');
+            $table->integer('age');
             $table->string('about');
             $table->string('genre', 64);
 
