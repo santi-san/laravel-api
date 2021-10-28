@@ -29,3 +29,4 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 // Mover a entorno seguro en produccion
 Route::get('/getUsers', [UserdataController::class,'getUsers']);
+Route::get('/getUsers/{id}', [UserdataController::class,'getUserDetail']);
