@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserdataController;
+use App\Http\Controllers\ActivityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,11 +19,11 @@ Route::get('/test', [AuthController::class,'test']);
 
 // User
 
-Route::get('/getUsers', [UserdataController::class,'getUsers']);
-Route::get('/getUsers/{id}', [UserdataController::class,'getUserDetail']);
-Route::post('/getUsers', [UserdataController::class,'addUsers']);
-Route::put('/getUsers', [UserdataController::class,'updateUsers']);
-Route::DELETE('/getUsers', [UserdataController::class,'deleteUsers']);
+Route::get('/activity', [ActivityController::class,'getActivities']);
+Route::get('/activity/{id}', [ActivityController::class,'getActivityDetail']);
+Route::post('/activity', [ActivityController::class,'addActivity']);
+Route::put('/activity', [ActivityController::class,'updateActivity']);
+Route::DELETE('/activity', [ActivityController::class,'deleteActivity']);
 
 
 
@@ -31,4 +32,10 @@ Route::DELETE('/getUsers', [UserdataController::class,'deleteUsers']);
 // auth
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/testOauth', [AuthController::class,'testOauth']);
+    // User
+    Route::get('/getUsers', [UserdataController::class,'getUsers']);
+    Route::get('/getUsers/{id}', [UserdataController::class,'getUserDetail']);
+    Route::post('/getUsers', [UserdataController::class,'addUsers']);
+    Route::put('/getUsers', [UserdataController::class,'updateUsers']);
+    Route::DELETE('/getUsers', [UserdataController::class,'deleteUsers']);
 });
