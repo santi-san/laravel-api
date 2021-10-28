@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Userdata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class UserdataController extends ApiController
@@ -36,5 +38,45 @@ class UserdataController extends ApiController
         /*  return response()->json([
             'data' => $data
         ]); */
+    }
+    public function addUsers(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+            'age' => 'required',
+            'about' => 'required',
+            'genre' => 'required'
+
+
+        ]);
+        // Si falla la validacion devuelve json con status 422
+        if($validator->fails()) {
+            return $this->sendError($validator->errors(),"Error en la validacion de datos",422); 
+        }
+        // Si pasa la validacion, guardar datos recibidos
+        $input = $request->all();
+        //guarda la contraseña encriptada con bcrypt
+        $input['password'] = bcrypt($request->get("password"));
+        //crear usuario
+        $new_user = User::create($input); 
+        $token = $new_user->createToken('myApp')->accessToken;
+
+        $userData = new Userdata();
+        $userData->iduser = $new_user->id;
+        $userData->name = $request->get('name');
+        $userData->photo = $request->get('photo');
+        $userData->age = $request->get('age');
+        $userData->genre = $request->get('genre');
+        $userData->about = $request->get('about');
+        $userData->save();
+        
+        $data = [
+            'token' => $token,
+            'user' => $new_user,
+            'user_data' => $userData,
+        ];
+        return $this->sendResponse($data, 'Registered user successfully');
     }
 }

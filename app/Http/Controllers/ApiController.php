@@ -15,12 +15,12 @@ class ApiController extends Controller
         return response()->json($response, $code);
     }
 
-    public function sendError($error, $errorMessages = [], $code = 404){
+    public function sendError($error, $message, $code = 404){
         $response = [
             'success' => false,
-            'error' => $error,
-            'errorMessages' => $errorMessages
+            'error_message' => $message,
+            'error_data' => $error
         ];
-        return $response()->json($response, $code);
+        return response()->json($response,$code);
     }
 }
