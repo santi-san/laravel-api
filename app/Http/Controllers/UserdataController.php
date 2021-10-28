@@ -5,19 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Userdata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class UserdataController extends ApiController
 {
     public function getUsers() {
         $data = [];
-        $users = Userdata::all();
+        //$users = Userdata::all(); Eloquent
+
+        //query builder
+        $users = DB::table('users')
+                ->join('userdatas', 'users.id', '=', 'userdatas.iduser')
+                ->select('users.id', 'userdatas.name', 'userdatas.photo', 'userdatas.age', 'userdatas.genre')
+                ->get(); 
         $data['users'] = $users;
 
         return $this->sendResponse($data, 'List of users');
-        /*  return response()->json([
-            'data' => $data
-        ]); */
     }
     public function getUserDetail($id) {
         //Oauth
