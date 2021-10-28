@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class,'store']);
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Pruebas
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('/testOauth', [AuthController::class,'testOauth']);
 });

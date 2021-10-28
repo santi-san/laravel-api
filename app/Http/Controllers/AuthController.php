@@ -20,6 +20,16 @@ class AuthController extends Controller
         //
     }
 
+    public function testOauth(Request $request)
+    {
+        $user = Auth::user();
+        return response()->json(
+            [
+                'user' => $user
+            ], 200
+        );
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
