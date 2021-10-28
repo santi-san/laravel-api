@@ -79,4 +79,42 @@ class UserdataController extends ApiController
         ];
         return $this->sendResponse($data, 'Registered user successfully');
     }
+
+    public function updateUsers(Request $request) {
+        $user = User::find($request->get('id'));
+
+        if($user === null){
+            return $this->sendError("Error en los datos", ['el usuario no existe'] , 422); 
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'age' => 'required',
+            'about' => 'required',
+            'genre' => 'required'
+        ]);
+        // Si falla la validacion devuelve json con status 422
+        if($validator->fails()) {
+            return $this->sendError($validator->errors(),"Error en la validacion de datos",422); 
+        }
+        // update table USERS
+        $user->name = $request->get('name');
+        $user->save();
+
+        // updata table USERDATAS
+        $userData = Userdata::where('iduser', $request->get('id'))->first();
+        
+        $userData->name = $request->get('name');
+        $userData->photo = $request->get('photo');
+        $userData->age = $request->get('age');
+        $userData->genre = $request->get('genre');
+        $userData->about = $request->get('about');
+        $userData->save();
+
+        $data = [
+            'user' => $user,
+            'user_data' => $userData,
+        ];
+        return $this->sendResponse($data, 'User updated successfully');
+    }
 }

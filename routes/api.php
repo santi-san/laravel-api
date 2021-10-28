@@ -21,6 +21,7 @@ Route::get('/test', [AuthController::class,'test']);
 Route::get('/getUsers', [UserdataController::class,'getUsers']);
 Route::get('/getUsers/{id}', [UserdataController::class,'getUserDetail']);
 Route::post('/getUsers', [UserdataController::class,'addUsers']);
+Route::put('/getUsers', [UserdataController::class,'updateUsers']);
 
 
 
