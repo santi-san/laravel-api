@@ -30,10 +30,17 @@ class ActivityController extends ApiController
 
         if($activity === null) {
             return $this->sendError('Error in the data',['The acitivity does not exist'],422); 
-        
         }
+
+        $confirmations = DB::table('confirmations')
+        ->where('confirmations.idactivity', '=', $id)
+        ->join('userdatas', 'confirmations.iduser', 'userdatas.iduser')
+        ->select('userdatas.iduser','userdatas.name','userdatas.photo','userdatas.age','userdatas.genre')
+        ->get();
+
         $data = [];
         $data['activity'] = $activity;
+        $data['user'] = $confirmations;
 
         return $this->sendResponse($data, 'Activity found');
 
