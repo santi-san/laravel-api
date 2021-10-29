@@ -25,6 +25,21 @@ class ActivityController extends ApiController
         return $this->sendResponse($data, 'List of activities');
     }
 
+    public function getActivityDetail($id) {
+        $activity = Activity::find($id);
+
+        if($activity === null) {
+            return $this->sendError('Error in the data',['The acitivity does not exist'],422); 
+        
+        }
+        $data = [];
+        $data['activity'] = $activity;
+
+        return $this->sendResponse($data, 'Activity found');
+
+    }
+
+
     public function addActivity(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:activities',
