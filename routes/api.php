@@ -21,29 +21,29 @@ Route::get('/test', [AuthController::class,'test']);
 // confirmation
 
 Route::get('/confirmation', [ConfirmationController::class,'getConfirmations']);
-Route::get('/confirmation/{id}', [confirmationController::class,'addAConfirmationDetail']);
-Route::post('/confirmation', [confirmationController::class,'addAConfirmation']);
+Route::get('/confirmation/{id}', [confirmationController::class,'getConfirmationDetail']);
+Route::post('/confirmation', [confirmationController::class,'addConfirmation']);
 Route::delete('/confirmation', [confirmationController::class,'deleteConfirmation']);
 
 
 
 
+// User
+Route::get('/getUsers', [UserdataController::class,'getUsers']);
+Route::get('/getUsers/{id}', [UserdataController::class,'getUserDetail']);
+Route::post('/getUsers', [UserdataController::class,'addUsers']);
+Route::put('/getUsers', [UserdataController::class,'updateUsers']);
+Route::DELETE('/getUsers', [UserdataController::class,'deleteUsers']);
 
+// Activity
+Route::get('/activity', [ActivityController::class,'getActivities']);
+Route::get('/activity/{id}', [ActivityController::class,'getActivityDetail']);
+Route::post('/activity', [ActivityController::class,'addActivity']);
+Route::put('/activity', [ActivityController::class,'updateActivity']);
+Route::put('/activity/active', [ActivityController::class,'deleteActivity']);
 // auth
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/testOauth', [AuthController::class,'testOauth']);
 
-    // User
-    Route::get('/getUsers', [UserdataController::class,'getUsers']);
-    Route::get('/getUsers/{id}', [UserdataController::class,'getUserDetail']);
-    Route::post('/getUsers', [UserdataController::class,'addUsers']);
-    Route::put('/getUsers', [UserdataController::class,'updateUsers']);
-    Route::DELETE('/getUsers', [UserdataController::class,'deleteUsers']);
-
-    // Activity
-    Route::get('/activity', [ActivityController::class,'getActivities']);
-    Route::get('/activity/{id}', [ActivityController::class,'getActivityDetail']);
-    Route::post('/activity', [ActivityController::class,'addActivity']);
-    Route::put('/activity', [ActivityController::class,'updateActivity']);
-    Route::put('/activity/active', [ActivityController::class,'deleteActivity']);
+    
 });

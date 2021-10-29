@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Confirmation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ConfirmationController extends ApiController
@@ -22,7 +24,40 @@ class ConfirmationController extends ApiController
         return $this->sendResponse($data, 'List of confirmations');
     }
 
-    public function addAConfirmation(Request $request) {
+    public function getConfirmationDetail($id, Request $request) {
+        // Confirmation
+        $confirmation = Confirmation::find($id);
+
+        if($confirmation === null){
+            return $this->sendError("Error in the data", ['The confirmation does not exist'] , 422); 
+        }
+
+
+        // Activity 
+        $activity = Activity::find($confirmation->idactivity);
+
+        if($activity === null){
+            return $this->sendError("Error en los datos", ['La actividad no existe'] , 422); 
+        }
+
+
+        // User
+        $users = DB::table('confirmations')
+                ->where('confirmations.idactivity', '=', $confirmation->idactivity)
+                ->join('userdatas', 'confirmations.iduser', 'userdatas.iduser')
+                ->select('userdatas.iduser','userdatas.name','userdatas.photo','userdatas.age','userdatas.genre')
+                ->get();
+
+        $data = [
+            'activity' => $activity,
+            'users' => $users
+        ];
+        return $this->sendResponse($data, 'Activity retrived successfully');
+    }
+
+
+
+    public function addConfirmation(Request $request) {
         $validator = Validator::make($request->all(), [
             'iduser' => 'required',
             'idactivity' => 'required',
