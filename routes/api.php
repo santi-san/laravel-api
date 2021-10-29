@@ -23,7 +23,7 @@ Route::get('/activity', [ActivityController::class,'getActivities']);
 Route::get('/activity/{id}', [ActivityController::class,'getActivityDetail']);
 Route::post('/activity', [ActivityController::class,'addActivity']);
 Route::put('/activity', [ActivityController::class,'updateActivity']);
-Route::DELETE('/activity', [ActivityController::class,'deleteActivity']);
+Route::put('/activity/active', [ActivityController::class,'deleteActivity']);
 
 
 
