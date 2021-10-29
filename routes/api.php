@@ -22,6 +22,7 @@ Route::get('/test', [AuthController::class,'test']);
 
 Route::get('/confirmation', [ConfirmationController::class,'getConfirmations']);
 Route::get('/confirmation/{id}', [confirmationController::class,'getConfirmationDetail']);
+Route::get('/confirmationUser/{id}', [confirmationController::class,'getConfirmationUser']);
 Route::post('/confirmation', [confirmationController::class,'addConfirmation']);
 Route::delete('/confirmation', [confirmationController::class,'deleteConfirmation']);
 

@@ -23,6 +23,25 @@ class ConfirmationController extends ApiController
 
         return $this->sendResponse($data, 'List of confirmations');
     }
+    public function getConfirmationUser($id, Request $request) {
+        $confirmations = Confirmation::where('iduser', $id)
+                                    ->get();
+
+        // User
+        $confirmations = DB::table('confirmations')
+        ->where('confirmations.iduser', '=', $id)
+        ->join('activities', 'confirmations.idactivity', 'activities.id')
+        ->select('confirmations.id','activities.id AS idactividad', 'activities.name', 'activities.active', 'activities.date', 'activities.description', 'activities.photo')
+        ->get();
+
+
+        $data = [
+            'confirmations' => $confirmations
+        ];
+
+        return $this->sendResponse($data, 'Confirmations retrieved successfully');
+
+    }
 
     public function getConfirmationDetail($id, Request $request) {
         // Confirmation
