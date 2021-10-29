@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cfea935f3b623bc8417816e5a52e33f2",
+    "content-hash": "1c5e1c514d008fd8c24eb52e4c4de4b0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,74 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
             "time": "2021-03-11T06:42:03+00:00"
+        },
+        {
+            "name": "berkayk/onesignal-laravel",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/berkayk/laravel-onesignal.git",
+                "reference": "11a3015f33a2cd0c98f2fe1c1ea47cf67cc3e5e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/berkayk/laravel-onesignal/zipball/11a3015f33a2cd0c98f2fe1c1ea47cf67cc3e5e6",
+                "reference": "11a3015f33a2cd0c98f2fe1c1ea47cf67cc3e5e6",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.2|^7.0.1",
+                "illuminate/support": "~5.5|~6.0|~7.0|~8.0",
+                "php": ">=5.4.0",
+                "symfony/psr-http-message-bridge": "1.*|2.*"
+            },
+            "require-dev": {
+                "vlucas/phpdotenv": "^2.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Berkayk\\OneSignal\\OneSignalServiceProvider"
+                    ],
+                    "aliases": {
+                        "OneSignal": "Berkayk\\OneSignal\\OneSignalFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Berkayk\\OneSignal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Berkay Kaya",
+                    "email": "berkayk@gmail.com",
+                    "homepage": "http://berkaykaya.com"
+                },
+                {
+                    "name": "Maykonn Welington Candido",
+                    "email": "maykonn@outlook.com"
+                }
+            ],
+            "description": "OneSignal Push Wrapper Laravel",
+            "keywords": [
+                "WebPush",
+                "laravel",
+                "laravel 5",
+                "onesignal",
+                "push"
+            ],
+            "support": {
+                "issues": "https://github.com/berkayk/laravel-onesignal/issues",
+                "source": "https://github.com/berkayk/laravel-onesignal/tree/v1.0.7"
+            },
+            "time": "2021-01-28T10:52:07+00:00"
         },
         {
             "name": "brick/math",
@@ -6505,16 +6573,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.15.0",
+            "version": "2.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "3ee6e94815462bcf09bca0efc1c9069685df8da3"
+                "reference": "23400e6cc565c9dcae2c53704b4de1c4870c0697"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/3ee6e94815462bcf09bca0efc1c9069685df8da3",
-                "reference": "3ee6e94815462bcf09bca0efc1c9069685df8da3",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/23400e6cc565c9dcae2c53704b4de1c4870c0697",
+                "reference": "23400e6cc565c9dcae2c53704b4de1c4870c0697",
                 "shasum": ""
             },
             "require": {
@@ -6578,7 +6646,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2021-10-11T15:24:06+00:00"
+            "time": "2021-10-28T11:47:23+00:00"
         },
         {
             "name": "facade/ignition-contracts",
