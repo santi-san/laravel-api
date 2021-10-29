@@ -50,4 +50,36 @@ class ActivityController extends ApiController
         ];
         return $this->sendResponse($data, 'Activity created successfully');
     }
+
+    public function updateActivity(Request $request) {
+        $activity = Activity::find($request->get('id'));
+
+        if($activity === null){
+            return $this->sendError("Error en los datos", ['La actividad no existe'] , 422); 
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'photo' => 'required',
+            'description' => 'required',
+            'date' => 'required'
+        ]);
+        // If validation fails return json with status 422
+        if($validator->fails()) {
+            return $this->sendError($validator->errors(),"Error en la validacion de datos",422); 
+        }
+
+        // Update table Activities
+
+        $activity->name = $request->get('name');
+        $activity->photo = $request->get('photo');
+        $activity->description = $request->get('description');
+        $activity->date = $request->get('date');
+        $activity->save();
+
+        $data = [
+            'activity' => $activity,
+        ];
+        return $this->sendResponse($data, 'Activity updated successfully');
+    }
 }
