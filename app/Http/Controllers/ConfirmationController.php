@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Confirmation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use OneSignal;
 use Illuminate\Support\Facades\Validator;
 
 class ConfirmationController extends ApiController
@@ -100,6 +101,25 @@ class ConfirmationController extends ApiController
         $confirmation->iduser = $request->get('iduser');
         $confirmation->idactivity = $request->get('idactivity');
         $confirmation->save();
+
+         // User
+         $users = DB::table('confirmations')
+         ->where('confirmations.idactivity', '=', $confirmation->idactivity)
+         ->join('userdatas', 'confirmations.iduser', 'userdatas.iduser')
+         ->select('userdatas.idonesignal')
+         ->get();
+
+         foreach ($users as $user) {
+             $id = $user->idonesignal;
+             if($id != 1 ) {
+                 OneSignal::sendNotificationToUser('another user has signed up for the activity',
+                 $id,
+                 $url = null,
+                 $data = null,
+                 $buttons = null,
+                 $schedule = null);
+             }
+         }
 
         $data = [
             'confirmation' => $confirmation,

@@ -19,6 +19,5 @@ return array(
 	|
 	*/
     'rest_api_key' => env('OTM2MTI3OGEtMTZjZi00NmRlLTkyMGMtMjYwMjA0ZWFhY2Fj'),
-    'user_auth_key' => env('YmJlNzgwOGItOWViYy00ZTY3LWJhOTMtNGU3NDEyNTk4YTVm
-	')
+    'user_auth_key' => env('YmJlNzgwOGItOWViYy00ZTY3LWJhOTMtNGU3NDEyNTk4YTVm')
 );
