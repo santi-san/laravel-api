@@ -42,6 +42,12 @@ Route::get('/activity/{id}', [ActivityController::class,'getActivityDetail']);
 Route::post('/activity', [ActivityController::class,'addActivity']);
 Route::put('/activity', [ActivityController::class,'updateActivity']);
 Route::put('/activity/active', [ActivityController::class,'deleteActivity']);
+
+Route::put('/getUsers/addOneSignal/{id}', [UserdataController::class,'addOneSignal']);
+
+
+
+
 // auth
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/testOauth', [AuthController::class,'testOauth']);
